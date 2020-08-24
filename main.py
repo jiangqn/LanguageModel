@@ -3,7 +3,7 @@ import yaml
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument('--task', type=str, default='test', choices=['preprocess', 'train', 'test', 'predict'])
+parser.add_argument('--task', type=str, default='test', choices=['preprocess', 'train', 'test', 'predict', 'select'])
 parser.add_argument('--gpu', type=int, default=0, choices=[i for i in range(8)])
 parser.add_argument('--config', type=str, default='config.yaml')
 
@@ -24,5 +24,8 @@ elif args.task == 'test':
 elif args.task == 'predict':
     from src.predict import predict
     predict(config)
+elif args.task == 'select':
+    from src.select import select
+    select(config)
 else:
     raise ValueError('argument --task error')

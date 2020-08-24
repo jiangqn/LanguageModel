@@ -33,7 +33,7 @@ def predict(config: dict) -> None:
 
     ppl = get_ppl(model, train_iter)
 
-    df = pd.read_csv(os.path.join(base_path, 'train.tsv'))
+    df = pd.read_csv(os.path.join(base_path, 'train.tsv'), delimiter='\t')
     df['ppl'] = ppl
 
     df.to_csv(annotated_save_path, sep='\t')

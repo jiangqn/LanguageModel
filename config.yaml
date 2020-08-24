@@ -11,3 +11,4 @@ weight_decay: 0
 epoches: 5
 eval_freq: 100
 clip_grad_norm: 5.0
+select_max_ppl: 15

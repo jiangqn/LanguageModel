@@ -13,7 +13,7 @@ def get_ppl(model: nn.Module, data_iter: Iterator) -> List[float]:
     model.eval()
     with torch.no_grad():
 
-        for batch in data_iter:
+        for i, batch in enumerate(data_iter):
 
             sentence = batch.sentence
             input_sentence = sentence
@@ -32,6 +32,9 @@ def get_ppl(model: nn.Module, data_iter: Iterator) -> List[float]:
             output_sentence_lens = mask.sum(dim=1, keepdim=False)
             batch_ppl = torch.pow(2, (loss * mask).sum(dim=1, keepdim=False) / output_sentence_lens)
             ppl.extend(batch_ppl.tolist())
+
+            if i % 100 == 0:
+                print(i)
 
     return ppl
 
