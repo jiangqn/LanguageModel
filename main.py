@@ -3,7 +3,7 @@ import yaml
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument('--task', type=str, default='test', choices=['preprocess', 'train', 'test'])
+parser.add_argument('--task', type=str, default='test', choices=['preprocess', 'train', 'test', 'predict'])
 parser.add_argument('--gpu', type=int, default=0, choices=[i for i in range(8)])
 parser.add_argument('--config', type=str, default='config.yaml')
 
@@ -18,6 +18,11 @@ if args.task == 'preprocess':
 elif args.task == 'train':
     from src.train import train_language_model
     train_language_model(config)
-else:
+elif args.task == 'test':
     from src.test import test_language_model
     test_language_model(config)
+elif args.task == 'predict':
+    from src.predict import predict
+    predict(config)
+else:
+    raise ValueError('argument --task error')
